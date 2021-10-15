@@ -9,10 +9,10 @@ contract compraevenda {
     string cartorio;
     string datadadevencimento;
     bool quitado = false;
-    uint valortotal;
-    uint valordaentrada;
-    uint valoremaberto;
-    uint valordaparcela;
+    uint public valortotal = 1000;
+    uint public valordaentrada;
+    uint public valoremaberto;
+    uint public valordaparcela;
     uint quantidadedeparcelas;
     uint porcentagemdamulta;
     
@@ -24,4 +24,6 @@ contract compraevenda {
         
         }
     
+    
+}
 
