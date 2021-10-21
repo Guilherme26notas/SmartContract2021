@@ -1,62 +1,49 @@
 pragma solidity 0.8.9;
 
 
-contract compraevenda {
+contract permuta {
     
-    string comprador;
-    string vendedor;
-    string matricula;
-    string cartorio;
-    string datadadevencimento;
-    bool quitado = false;
-    uint public valortotal = 10000;
-    uint public valordaentrada;
-    uint public valoremaberto;
-    uint public valordaparcela;
-    uint quantidadedeparcelas = 6;
-    uint porcentagemdamulta = 20;
+    string PrimeiroPermutante;
+    string SegundoPermutante;
+    string public DescricaoPrimeiroImovel;
+    string public Cartorio1;
+    uint ValorPrimeiroImovel = 10000;
+    string public DescricaoSegundoImovel;
+    string public Cartorio2;
+    uint ValorSegundoImovel = 20000;
+    uint ValorReposicao = 10000;
+    uint public PorcentagemITBI = 3;
     
     constructor (
-        uint _valortotal,
-        uint _valordaentrada,
-        uint _quantidadedeparcelas,
-        string memory _matricula,
-        string memory _cartorio
-        
+        string memory _DescricaoPrimeiroImovel,
+        string memory _Cartorio1,
+        uint _ValorPrimeiroImovel,
+        string memory _DescricaoSegundoImovel,
+        string memory _Cartorio2,
+        uint _ValorSegundoImovel,
+        uint _PorcentagemITBI
         )
+       
         { 
-            valortotal = _valortotal;
-            valordaentrada = _valordaentrada;
-            quantidadedeparcelas = _quantidadedeparcelas;
-            matricula = _matricula;
-            cartorio = _cartorio;
-            valoremaberto = valortotal;
-            valordaparcela = valorparcela();
-            
+            DescricaoPrimeiroImovel = _DescricaoPrimeiroImovel;
+            Cartorio1 = _Cartorio1;
+            ValorPrimeiroImovel = _ValorPrimeiroImovel;
+            DescricaoSegundoImovel = _DescricaoSegundoImovel;
+            Cartorio2 = _Cartorio2;
+            ValorSegundoImovel = _ValorSegundoImovel;
+            PorcentagemITBI = _PorcentagemITBI;
         }
     
-    function pagarentrada(uint _valorpagamento) public returns(uint, string memory) {
-        valordaentrada = _valorpagamento;
-        valoremaberto = valortotal - _valorpagamento;
-        return(valoremaberto, "valor em aberto");
         
-                        }
-                        
-    function pagarparcela(uint _valordaparcela) public returns(uint, string memory) {
-        valoremaberto = valoremaberto - _valordaparcela;
-        return(valoremaberto, "valor em aberto");
-    }
+        function Imovel(uint _ValorReposicao) public view returns(uint, string memory) {
+        uint Reposicao = ValorReposicao - ValorSegundoImovel;
+        return(Reposicao, "Dos valores");
+        }
+        
+        
+        function ITBI(uint _PorcentagemITBI) public returns(uint, string memory) {
+        PorcentagemITBI = _PorcentagemITBI*ValorPrimeiroImovel/100;        
+        return(ValorPrimeiroImovel, "Valor do ITBI");
+        }
 
-    function valorparcela() public view returns (uint) {
-        uint calculovalorparcela = (valortotal-valordaentrada)/quantidadedeparcelas;
-        return(calculovalorparcela);
-            }
-            
-    function valordamulta(uint _porcentagemdamulta) public view returns(uint, string memory) {
-        uint multa = _porcentagemdamulta*valortotal/100;
-        return(multa, "valor da multa");
-        
-    }        
-            
 }
-
